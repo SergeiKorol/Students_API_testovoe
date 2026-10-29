@@ -25,8 +25,35 @@ class Student(pydantic.BaseModel):
     name: str
     phone_no: str
     status: StudentStatus
+
 class CreateStudentResponse(pydantic.BaseModel):
-    """Тело ответа POST /student — аналог OutputUser для create."""
+    """Тело ответа POST /student"""
+    message: str
+    status: int
+    student: Student
+
+class GetStudentResponse(pydantic.BaseModel):
+    """Тело ответа GET /student/{student_id} при успехе."""
+    status: int
+    student: Student
+
+class ErrorResponse(pydantic.BaseModel):
+    """Тело ответа при не успехе."""
+    status: int
+    message: str
+
+class GetStudentsResponse(pydantic.BaseModel):
+    """Тело ответа GET /student."""
+    status: int
+    students: list[Student]
+
+class DeleteStudentResponse(pydantic.BaseModel):
+    """Тело ответа DELETE /student/{student_id} при успехе."""
+    message: str
+    status: int
+
+class UpdateStudentResponse(pydantic.BaseModel):
+    """Тело ответа PUT /student/{student_id}."""
     message: str
     status: int
     student: Student
